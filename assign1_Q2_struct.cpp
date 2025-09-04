@@ -8,35 +8,35 @@ struct date{
         int year;
 
 public:
-void initDate(){
-    day=23;
-    month=9;
-    year=2025;
-    cout<<"The date is(via initlaize): "<<day<<'/'<<month<<'/'<<year<<endl;
+void initDate(struct date *ptr){
+    ptr->day=23;
+    ptr->month=9;
+    ptr->year=2025;
+    cout<<"The date is(via initlaize): "<<ptr->day<<'/'<<ptr->month<<'/'<<ptr->year<<endl;
 
 }
-void printDateOnConsole(){
+void printDateOnConsole(struct date *ptr){
 
-        cout<<"The date is(via printDateOnConsole  ): "<<day<<'/'<<month<<'/'<<year<<endl;
+        cout<<"The date is(via printDateOnConsole  ): "<<ptr->day<<'/'<<ptr->month<<'/'<<ptr->year<<endl;
 
 }
-void acceptDateOnConsole(){
+void acceptDateOnConsole(struct date *ptr){
     cout<<"Enter the day :"<<endl;
-    cin>>day;
+    cin>>ptr->day;
 
     cout<<"Enter the month :"<<endl;
-    cin>>month;
+    cin>>ptr->month;
 
     cout<<"Enter the year"<<endl;
-    cin>>year;
+    cin>>ptr->year;
 
     cout<<"Date accepted"<<endl;
-    cout<<"The date is(via accept): "<<day<<'/'<<month<<'/'<<year<<endl;
+    cout<<"The date is(via accept): "<<ptr->day<<'/'<<ptr->month<<'/'<<ptr->year<<endl;
 
 }
-void isLeapYear(){
-    cout<<"The year is :"<<year<<endl;
-    if((year%4==0 && year%100!=0)|| (year%400==0))
+void isLeapYear(struct date *ptr){
+    cout<<"The year is :"<<ptr->year<<endl;
+    if((ptr->year%4==0 && ptr->year%100!=0)|| (ptr->year%400==0))
     {
         cout<<"Leap year"<<endl;
     }
@@ -50,7 +50,7 @@ void isLeapYear(){
 
 int main(){
     int x;
-    class date d1;
+    struct date d1;
 
     cout<<"options for menu"<<endl;
 
@@ -66,27 +66,32 @@ int main(){
 
         switch (x)
         {
-        case 1:
+        case 1:{
             cout<<"Entered option 1"<<endl;
-            d1.initDate();
+            d1.initDate(&d1);
             break;
-        case 2:
+        }
+        case 2:{
             cout<<"Entered option 2"<<endl;
-            d1.printDateOnConsole();
+            d1.printDateOnConsole(&d1);
             break;
-        case 3:
+        }
+        case 3:{
             cout<<"Entered option 3"<<endl;
-            d1.acceptDateOnConsole();
+            d1.acceptDateOnConsole(&d1);
             break;
-        case 4:
+        }
+        case 4:{
             cout<<"Entered option 4"<<endl;
-            d1.isLeapYear();
+            d1.isLeapYear(&d1);
             break;
+        }
         
-        default:
+        default:{
             cout<<"Invalid option"<<endl;
             break;
         }
+    }
     } while (x!=0);
     
     return 0;
