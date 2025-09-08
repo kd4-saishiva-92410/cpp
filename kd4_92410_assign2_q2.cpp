@@ -1,58 +1,71 @@
 #include<iostream>
 using namespace std;
 
-
-
-class Tollbooth{
-    private:
+class Tollbooth {
+private:
     unsigned int total_cars;
-    unsigned int total_pay_cars;
-    unsigned int total_nopay_cars;
     double total_amt;
 
-    public:
-    Tollbooth(void){
-        this->total_cars=0;
-        this->total_amt=0;
-        this->total_pay_cars=0;
-        this->total_nopay_cars=0;
+public:
+    Tollbooth() {
+        total_cars = 0;
+        total_amt = 0.0;
     }
-    int payingCar(){
-        total_pay_cars=total_pay_cars+1;
-        total_amt=total_amt+0.50;
 
+    void payingCar() {
+        total_cars++;
+        total_amt += 0.50;
     }
-    int nopayCar(){
-        total_nopay_cars=total_nopay_cars+1;
 
+    void nopayCar() {
+        total_cars++;
     }
-    void printOnConsole(){
-        cout<<"The total cars and total amount is"<<endl;
-        total_cars=total_nopay_cars+total_pay_cars;
-        cout<<"Total cars : "<<total_cars<< " ||Total amount : "<<total_amt<<endl;
 
+    void printOnConsole() {
+        int paying_cars = total_amt / 0.50;
+        int non_paying_cars = total_cars - paying_cars;
+
+        cout << "The total paid cars : " << paying_cars << endl;
+        cout << "The total non paid cars : " << non_paying_cars << endl;
+        cout << "Total cars : " << total_cars
+             << " || Total amount : $" << total_amt << endl;
     }
 };
 
-int main(){
+int main() {
     Tollbooth t1;
-    int paying_cars;
-    int non_paying_cars;
-    cout<<"How many paying cars are passing :"<<endl;
-    cin>>paying_cars;
-    cout<<"How many non paying cars are passing :"<<endl;
-    cin>>non_paying_cars;
+    int x, count;
 
-    for(int i=1;i<=paying_cars;i++){
-        t1.payingCar();
-    }
-    for(int i=1;i<=non_paying_cars;i++){
-        t1.nopayCar();
-    }
+    do {
+        cout<<"_____________menu_____________"<<endl;
+        cout<<"0 : exit"<<endl;
+        cout<<"1 : enter non paying cars"<<endl;
+        cout<<"2 : enter paying cars"<<endl;
+        cout<<"3 : display totals"<<endl;
+        cout<<"Enter your choice: ";
+        cin>>x;
 
-    cout<<"Total info"<<endl;
-    t1.printOnConsole();
-
+        switch (x) {
+            case 0:
+                cout<<"Exit"<<endl;
+                break;
+            case 1:
+                cout<<"How many non paying cars? ";
+                cin>>count;
+                for(int i=0;i<count;i++) t1.nopayCar();
+                break;
+            case 2:
+                cout<<"How many paying cars? ";
+                cin>>count;
+                for(int i=0;i<count;i++) t1.payingCar();
+                break;
+            case 3:
+                t1.printOnConsole();
+                break;
+            default:
+                cout<<"Invalid option!"<<endl;
+        }
+    } while (x!=0);
 
     return 0;
 }
